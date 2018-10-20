@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import logo from './img/logo.png';
+import userAPI from './user.js'
 
 class App extends Component {
+  state = {
+    user: [],
+  }
+  componentDidMount() {
+    userAPI.getUser()
+      .forEach(user.getUserInformation);
+  }
+  
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <div className="Img-border">
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
+          <h1 className="App-title">Welcome to NOVELINK</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
