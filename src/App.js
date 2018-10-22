@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import logo from './img/logo.png';
-import userAPI from './user.js'
 
 class App extends Component {
   state = {
     user: [],
   }
-  componentDidMount() {
-    userAPI.getUser()
-      .forEach(user.getUserInformation);
-  }
-  
+
   render() {
     return (
       <div className="App">
