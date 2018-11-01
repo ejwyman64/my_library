@@ -6,74 +6,52 @@ import './App.js';
 import './Styles/App.css';
 import Header from './Header';
 import User from './User';
-import Library from './LibraryDocs/Library';
+import LibraryList from './LibraryDocs/LibraryList';
 
 class App extends Component {
 
   state = {
-
-    books: [
+    libraries: [
       {
-        id: "101",
-        title: "Sense and Sensibility",
-        author: "Jane Austen",
-        pageCount: 450,
-        isLendable: false,
-        isEditing: false
-      },
-      {
-        id: "102",
-        title: "1984",
-        author: "George Orwell",
-        pageCount: 320,
-        isLendable: false,
-        isEditing: false
-      },
-      {
-        id: "103",
-        title: "Enders Game",
-        author: "Orson Scott Card",
-        pageCount: 405,
-        isLendable: false,
+        name: "My Library",
         isEditing: false
       }
-    ]
+    ],
   }
 
 
-  toggleBookOptions = (property, indexToChange) =>
+
+  //Library functions ----------------------
+  //toggle library options
+  toggleLibraryOptions = (property, indexToChange) =>
     this.setState({
-      books: this.state.books.map((book, index) => {
+      libraries: this.state.libraries.map((library, index) => {
         if (index === indexToChange) {
           return {
-            ...book,
-            [property]: !book[property]
+            ...library,
+            [property]: !library[property]
           };
         }
-        return book;
+        return library;
       })
     });
 
-  toggleLendable = index =>
-    this.toggleBookOptions("isLendable", index);
+  toggleEditLibraryName = index =>
+    this.toggleLibraryOptions("isEditing", index);
 
-  toggleEditBook = index =>
-    this.toggleBookOptions("isEditing", index);
-
-  setTitleAt = (title, indexToChange) =>
+  //edit library name.
+  setNameAt = (name, indexToChange) =>
     this.setState({
-      books: this.state.books.map((book, index) => {
+      libraries: this.state.libraries.map((library, index) => {
         if (index === indexToChange) {
           return {
-            ...book,
-            title
+            ...library,
+            name
           };
         }
-        return book;
+        return library;
       })
     });
-
-  getTotalBooks = () => this.state.books.length;
 
   render() {
     return (
@@ -82,10 +60,10 @@ class App extends Component {
           <Header />
           <div className="content">
             <User />
-            <Library books={this.state.books}
-              toggleLendable={this.toggleLendable}
-              toggleEditBook={this.toggleEditBook}
-              setTitleAt={this.setTitleAt}
+            <LibraryList
+              libraries={this.state.libraries}
+              toggleEditLibraryName={this.toggleEditLibraryName}
+              setNameAt={this.setNameAt}
             />
           </div>
         </div>
