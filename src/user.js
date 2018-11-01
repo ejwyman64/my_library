@@ -1,31 +1,27 @@
-//require https
-const https = require('https');
+import React, { Component } from 'react';
 
-const userName = "ejwyman64";
 
-// print message to console.
-function printUserToDoc(username, fullname, librarygenre, bookcount) {
-  const message = `My username is ${username} and my real name is ${fullname}. My library is classified as ${librarygenre} and it contains ${bookcount} books.`;
-  console.log(message);
+class User extends Component {
+  render() {
+    return (
+      <div className="userProfile">
+        <h3>Username</h3>
+        <h4>First Last</h4>
+        <span>An image will be here.</span>
+        <EditUser />
+      </div>
+
+    );
+  }
 }
-  
-const request = https.get(`https://crudapi.codelouisville.org/users/${userName}/userProfile`, response => {
 
-  let body = "";
-  //Read the data.
-  response.on('data', data => {
-    body += data.toString();
-    // console.log(body);
-  });
+class EditUser extends Component {
+  render() {
+    return (
+      <button className="editUser">Edit</button>
+    );
+  }
+}
 
-  response.on('end', () => {
-    //Parse data.
-    const profile = JSON.parse(body);
-    const userProfile = profile[0];
-    //Print data.
-    printUserToDoc(userProfile.username, userProfile.firstname, userProfile.genre, userProfile.bookCount);
-  });
 
-});
-
-// module.exports.getUserInformation = getUserInformation;
+export default User;
