@@ -11,7 +11,7 @@ class Book extends Component {
                     <h5 name="author" className="author">Author: {this.props.author}</h5>
                     <h5 name="pageCount" className="pageCount">Length: {this.props.pageCount} pages</h5>
                 </div>
-                <button>remove</button>
+                <button onClick={this.props.handleRemoveBook}>remove</button>
             </div>
         );
     }
@@ -22,6 +22,7 @@ Book.propTypes = {
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     pageCount: PropTypes.number.isRequired,
+    handleRemoveBook: PropTypes.func.isRequired
 }
 
 export default Book;

@@ -12,6 +12,7 @@ class LibraryContainer extends Component {
               title={book.title}
               author={book.author}
               pageCount={book.pageCount}
+              handleRemoveBook={() => this.props.removeBook(index)}
             />
           )}
         </div>
@@ -23,6 +24,7 @@ class LibraryContainer extends Component {
 
 LibraryContainer.propTypes = {
   books: PropTypes.array.isRequired,
+  removeBook: PropTypes.func.isRequired
 }
 
 export default LibraryContainer;

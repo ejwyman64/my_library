@@ -45,6 +45,13 @@ class LibraryList extends Component {
         }
     }
 
+    removeBook = index =>
+    this.setState({
+        books: [
+            ...this.state.books.slice(0, index),
+            ...this.state.books.slice(index +1)
+        ]
+    })
 
 
     getTotalBooks = () => this.state.books.length;
@@ -79,6 +86,7 @@ class LibraryList extends Component {
                     </form>
                     <LibraryContainer
                         books={this.state.books}
+                        removeBook={this.removeBook}
                     />
                 </div>
             </div>
