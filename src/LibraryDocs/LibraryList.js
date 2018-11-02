@@ -6,47 +6,46 @@ import LibraryContainer from './LibraryContainer';
 class LibraryList extends Component {
 
     state = {
-
         pendingBook: "",
+
         books: [
             {
-                id: "101",
                 title: "Sense and Sensibility",
                 author: "Jane Austen",
-                pageCount: 450,
+                pageCount: 450
             },
             {
-                id: "102",
                 title: "1984",
                 author: "George Orwell",
-                pageCount: 320,
+                pageCount: 320
             },
             {
-                id: "103",
                 title: "Enders Game",
                 author: "Orson Scott Card",
-                pageCount: 405,
+                pageCount: 405
             }
         ]
     }
 
-    handleNewBook= e =>
-        this.setState({
-            pendingBook: e.target.value
-        });
+    handleNewBook = e =>
+        this.setState({ pendingBook: e.target.value});
 
     newBookSubmitHandler = e => {
         e.preventDefault();
-        this.setState({
-            books: [
-                {
-                    title: this.state.pendingBook
-                },
-                ...this.state.books
-            ],
-            pendingBook: ''
-        })
+        if (this.state.pendingBook !== [{title: "", author: "", pageCount: ""}]) {
+            const newBook = {
+                title: this.state.pendingBook,
+                author: "Great Success",
+                pageCount: 200
+            };
+            this.setState(prevState => ({
+                books: [newBook, ...prevState.books],
+                pendingGuest: ""
+            }));
+        }
     }
+
+
 
     getTotalBooks = () => this.state.books.length;
 
@@ -68,10 +67,20 @@ class LibraryList extends Component {
                         />
                     )}
                 </div>
-                <LibraryContainer
-                    books={this.state.books}
-                    handleNewBook={this.state.handleNewBook}
-                />
+                <div>
+                    <form onSubmit={this.newBookSubmitHandler}>
+                        <input
+                            type="text"
+                            name="title"
+                            value={this.state.pendingBook}
+                            onChange={this.handleNewBook}
+                            placeholder="title" />
+                        <button type="submit" name="submit" value="submit">Add Book</button>
+                    </form>
+                    <LibraryContainer
+                        books={this.state.books}
+                    />
+                </div>
             </div>
         );
     }

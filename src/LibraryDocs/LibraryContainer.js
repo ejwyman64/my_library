@@ -6,15 +6,6 @@ class LibraryContainer extends Component {
   render() {
     return (
       <div className="libraryContainer">
-        <form onSubmit={this.props.newBookSubmitHandler}>
-          <input
-            type="text"
-            value={this.props.pendingBook}
-            onChange={this.props.handleNewBook}
-            placeholder="Search ISBN" />
-          <button type="submit" name="submit" value="submit">Add Book</button>
-        </form>
-        <div>
           {this.props.books.map((book, index) =>
             <Book
               key={index}
@@ -24,11 +15,11 @@ class LibraryContainer extends Component {
             />
           )}
         </div>
-      </div >
     );
   }
 }
 
+// The submit button is not working.
 
 LibraryContainer.propTypes = {
   books: PropTypes.array.isRequired,
