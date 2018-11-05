@@ -6,16 +6,20 @@ class LibraryContainer extends Component {
   render() {
     return (
       <div className="libraryContainer">
-          {this.props.books.map((book, index) =>
-            <Book
-              key={index}
-              title={book.title}
-              author={book.author}
-              pageCount={book.pageCount}
-              handleRemoveBook={() => this.props.removeBook(index)}
-            />
-          )}
-        </div>
+        {this.props.books.map((book, index) =>
+          <Book
+            key={index}
+            title={book.title}
+            authors={book.authors}
+            pageCount={book.pageCount}
+            publisher={book.publisher}
+            publishedDate={book.publishedDate}
+            categories={book.categories}
+            language={book.language}
+            handleRemoveBook={() => this.props.removeBook(index)}
+          />
+        )}
+      </div>
     );
   }
 }
@@ -24,7 +28,7 @@ class LibraryContainer extends Component {
 
 LibraryContainer.propTypes = {
   books: PropTypes.array.isRequired,
-  removeBook: PropTypes.func.isRequired
+  removeBook: PropTypes.func.isRequired,
 }
 
 export default LibraryContainer;

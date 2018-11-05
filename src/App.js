@@ -1,57 +1,15 @@
 // import ReactBootstrap from 'react-bootstrap';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import './App.js';
 import './Styles/App.css';
 import Header from './Header';
-import User from './User';
-import LibraryList from './LibraryDocs/LibraryList';
+import Home from './Home';
+import Search from './Search';
+import About from './About';
 
 class App extends Component {
-
-  state = {
-    libraries: [
-      {
-        name: "My Library",
-        isEditing: false
-      }
-    ],
-  }
-
-
-
-  //Library functions ----------------------
-  //toggle library options
-  toggleLibraryOptions = (property, indexToChange) =>
-    this.setState({
-      libraries: this.state.libraries.map((library, index) => {
-        if (index === indexToChange) {
-          return {
-            ...library,
-            [property]: !library[property]
-          };
-        }
-        return library;
-      })
-    });
-
-  toggleEditLibraryName = index =>
-    this.toggleLibraryOptions("isEditing", index);
-
-  //edit library name.
-  setNameAt = (name, indexToChange) =>
-    this.setState({
-      libraries: this.state.libraries.map((library, index) => {
-        if (index === indexToChange) {
-          return {
-            ...library,
-            name
-          };
-        }
-        return library;
-      })
-    });
 
   render() {
     return (
@@ -59,12 +17,10 @@ class App extends Component {
         <div className="container">
           <Header />
           <div className="content">
-            <User />
-            <LibraryList
-              libraries={this.state.libraries}
-              toggleEditLibraryName={this.toggleEditLibraryName}
-              setNameAt={this.setNameAt}
-            />
+            <Route exact path="/" render={() => <Redirect to="/home" />} />
+            <Route path="/home" component={Home} />
+            <Route path="/search" component={Search} />
+            <Route path="/about" component={About} />
           </div>
         </div>
       </BrowserRouter>

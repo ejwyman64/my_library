@@ -10,48 +10,61 @@ class LibraryList extends Component {
 
         books: [
             {
-                title: "Sense and Sensibility",
-                author: "Jane Austen",
-                pageCount: 450
-            },
-            {
-                title: "1984",
-                author: "George Orwell",
-                pageCount: 320
-            },
-            {
-                title: "Enders Game",
-                author: "Orson Scott Card",
-                pageCount: 405
+                id: "",
+                title: "",
+                authors: "",
+                publisher: "",
+                publishedDate: "",
+                categories: "",
+                pageCount: 0,
+                smallThumbnail: "",
+                thumbnail: "",
+                language: ""
+
             }
         ]
     }
 
-    handleNewBook = e =>
-        this.setState({ pendingBook: e.target.value});
+    // sendBookToLibrary = e => {
+    //     fetch('https://my-library-220222.firebaseio.com/books.json', {
+    //         method: 'POST',
+    //         const newBook = {
+    //             title: e.target.elements.title.value,
+    //             authors: e.target.elements.authors.value,
+    //             publisher: e.target.elements.publisher.value,
+    //             publishedDate: e.target.elements.publishedDate.value,
+    //             categories: e.target.elements.categories.value,
+    //             pageCount: e.target.elements.pageCount.value,
+    //             language: e.target.elements.language.value
+    //         }
+    //     }
 
     newBookSubmitHandler = e => {
         e.preventDefault();
-        if (this.state.pendingBook !== [{title: "", author: "", pageCount: ""}]) {
-            const newBook = {
-                title: this.state.pendingBook,
-                author: "Great Success",
-                pageCount: 200
-            };
-            this.setState(prevState => ({
-                books: [newBook, ...prevState.books],
-                pendingGuest: ""
-            }));
+        const newBook = {
+            title: e.target.elements.title.value,
+            authors: e.target.elements.authors.value,
+            publisher: e.target.elements.publisher.value,
+            publishedDate: e.target.elements.publishedDate.value,
+            categories: e.target.elements.categories.value,
+            pageCount: e.target.elements.pageCount.value,
+            language: e.target.elements.language.value
         }
+        e.target.reset();
+        this.setState(prevState => ({
+            books: [newBook, ...prevState.books],
+            pendingBook: ""
+        }));
     }
 
+
     removeBook = index =>
-    this.setState({
-        books: [
-            ...this.state.books.slice(0, index),
-            ...this.state.books.slice(index +1)
-        ]
-    })
+        this.setState({
+            books: [
+                ...this.state.books.slice(0, index),
+                ...this.state.books.slice(index + 1)
+            ]
+        })
 
 
     getTotalBooks = () => this.state.books.length;
@@ -76,12 +89,40 @@ class LibraryList extends Component {
                 </div>
                 <div>
                     <form onSubmit={this.newBookSubmitHandler}>
-                        <input
+                        <input required
                             type="text"
                             name="title"
-                            value={this.state.pendingBook}
-                            onChange={this.handleNewBook}
                             placeholder="title" />
+
+                        <input required
+                            type="text"
+                            name="authors"
+                            placeholder="author" />
+
+                        <input required
+                            type="text"
+                            name="publisher"
+                            placeholder="publisher" />
+
+                        <input required
+                            type="text"
+                            name="publishedDate"
+                            placeholder="published date" />
+
+                        <input required
+                            type="text"
+                            name="categories"
+                            placeholder="category" />
+
+                        <input required
+                            type="number"
+                            name="pageCount"
+                            placeholder="page count" />
+
+                        <input required
+                            type="text"
+                            name="language"
+                            placeholder="language" />
                         <button type="submit" name="submit" value="submit">Add Book</button>
                     </form>
                     <LibraryContainer
