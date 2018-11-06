@@ -8,8 +8,11 @@ class SearchedBook extends Component {
             return (
                 <div className="bookElement">
                     <div className="bookInfo">
-                        <h5 name="isbn" className="isbn">book ID: {this.props.book.id}</h5>
-                        <h5 name="title" className="title">title: {this.props.book.volumeInfo.title}</h5>
+                        {/* <img src={this.props.book.volumeInfo.imageLinks.smallThumbnail} alt="Cover Art" /> */}
+                        <h6 name="isbn" className="isbn">Book ID: {this.props.book.id}</h6>
+                        <h4 name="title" className="title">Title: {this.props.book.volumeInfo.title}</h4>
+                        <h5 name="authors" className="authors">Author: {this.props.book.volumeInfo.authors[0]}</h5>
+
 
                     </div>
                     <button onClick={this.props.handleAddBook}>+ Add Book</button>

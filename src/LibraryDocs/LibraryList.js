@@ -14,8 +14,15 @@ class LibraryList extends Component {
 
     componentDidMount() {
         Axios.get(`https://my-library-220222.firebaseio.com/books.json`)
-        .then(res => this.setState({books: res.data}))
+        .then(res => this.setState({books: res.data}));
     }
+
+    // deleteBookHandler = e => {
+    //     e.preventDefault();
+    //     Axios.delete(`https://my-library-220222.firebaseio.com/books.json`)
+    //     .then()
+    // }
+
 
     // sendBookToLibrary = e => {
 
@@ -33,7 +40,7 @@ class LibraryList extends Component {
             categories: e.target.elements.categories.value,
             pageCount: e.target.elements.pageCount.value,
             language: e.target.elements.language.value,
-            isbn: e.target.elements.isbn.value
+            coverImage: e.target.elements.coverImage.value
         }
         e.target.reset();
         this.setState(prevState => ({
@@ -112,8 +119,8 @@ class LibraryList extends Component {
 
                         <input required
                             type="text"
-                            name="isbn"
-                            placeholder="ISBN number" />
+                            name="coverImage"
+                            placeholder="Image URL" />
                         <button type="submit" name="submit" value="submit">Add Book</button>
                     </form>
                     <LibraryContainer
