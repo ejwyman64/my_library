@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-const url = `https://www.googleapis.com/books/v1/volumes?q=ender%27s%20game`;
+import SearchedBook from './SearchedBook';
 
 
 class Search extends Component {
@@ -10,14 +9,20 @@ class Search extends Component {
         searchQuery: []
     }
 
-    componentDidMount() {
-        axios.get(url).then(response => {
+    submitHandlerSearch = (e) => {
+        e.preventDefault();
+        const searchUrl = `https://www.googleapis.com/books/v1/volumes?q=${e.target.elements.searchInput.value}`;
+        axios.get(searchUrl).then(response => {
             this.setState({
                 searchQuery: response.data.items
             });
         }).catch(error => {
             console.log('Error fetching and parsing data.', error)
         });
+    }
+
+    addBook = book => {
+        axios.post(`https://my-library-220222.firebaseio.com/books.json`, book)
     }
 
     render() {
@@ -34,13 +39,22 @@ class Search extends Component {
                     <li><span>lccn:</span> Returns results where the text following this keyword is the Library of Congress Control Number.</li>
                     <li><span>oclc:</span> Returns results where the text following this keyword is the Online Computer Library Center number.</li>
                 </ul>
-                <form>
+                <form onSubmit={this.submitHandlerSearch}>
                     <input required
                         type="text"
-                        name="searchQuery"
+                        name="searchInput"
                         placeholder="title, author, publisher, isbn, etc." />
                     <button type="submit" name="submit" value="submit">Search for Book</button>
                 </form>
+                <div>
+                    {this.state.searchQuery.map((book, index) =>
+                        <SearchedBook
+                            key={index}
+                            book={book}
+                            handleAddBook={() => this.addBook(book)}
+                        />
+                    )}
+                </div>
             </div>
         );
     }

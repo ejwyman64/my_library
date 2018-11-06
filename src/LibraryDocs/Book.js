@@ -4,24 +4,22 @@ import PropTypes from 'prop-types';
 
 class Book extends Component {
     render() {
-        if (this.props.title) {
             return (
                 <div className="bookElement">
                     <div className="bookInfo">
-                        <h4 name="title" className="title">Title: {this.props.title}</h4>
-                        <h5 name="authors" className="author">Author: {this.props.authors}</h5>
-                        <h5 name="pageCount" className="pageCount">Length: {this.props.pageCount} pages</h5>
-                        <h5 name="publisher" className="publisher">Publisher: {this.props.publisher}</h5>
-                        <h5 name="publishedDate" className="publishedDate">Date Published: {this.props.publishedDate}</h5>
-                        <h5 name="categories" className="categories">Category: {this.props.categories}</h5>
-                        <h5 name="language" className="language">Language: {this.props.language}</h5>
+                        <h4 name="title" className="title">Title: {this.props.book.volumeInfo.title}</h4>
+                        <h5 name="authors" className="author">Author: {this.props.book.authors}</h5>
+                        <h5 name="pageCount" className="pageCount">Length: {this.props.book.pageCount} pages</h5>
+                        <h5 name="publisher" className="publisher">Publisher: {this.props.book.publisher}</h5>
+                        <h5 name="publishedDate" className="publishedDate">Date Published: {this.props.book.publishedDate}</h5>
+                        <h5 name="categories" className="categories">Category: {this.props.book.categories}</h5>
+                        <h5 name="language" className="language">Language: {this.props.book.language}</h5>
+                        <h5 name="isbn" className="isbn">ISBN: {this.props.book.isbn}</h5>
+
                     </div>
                     <button onClick={this.props.handleRemoveBook}>remove</button>
                 </div>
             )
-        } return (
-            <span className="hidden"></span>
-        );
     }
 
 }
@@ -35,6 +33,7 @@ Book.propTypes = {
     publishedDate: PropTypes.string.isRequired,
     categories: PropTypes.string.isRequired,
     language: PropTypes.string.isRequired,
+    isbn: PropTypes.string.isRequired,
     handleRemoveBook: PropTypes.func.isRequired
 }
 

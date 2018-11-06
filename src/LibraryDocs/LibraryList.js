@@ -2,41 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Library from './Library';
 import LibraryContainer from './LibraryContainer';
+import Axios from 'axios';
 
 class LibraryList extends Component {
 
     state = {
         pendingBook: "",
 
-        books: [
-            {
-                id: "",
-                title: "",
-                authors: "",
-                publisher: "",
-                publishedDate: "",
-                categories: "",
-                pageCount: 0,
-                smallThumbnail: "",
-                thumbnail: "",
-                language: ""
+        books: {}
+    }
 
-            }
-        ]
+    componentDidMount() {
+        Axios.get(`https://my-library-220222.firebaseio.com/books.json`)
+        .then(res => this.setState({books: res.data}))
     }
 
     // sendBookToLibrary = e => {
+
     //     fetch('https://my-library-220222.firebaseio.com/books.json', {
     //         method: 'POST',
-    //         const newBook = {
-    //             title: e.target.elements.title.value,
-    //             authors: e.target.elements.authors.value,
-    //             publisher: e.target.elements.publisher.value,
-    //             publishedDate: e.target.elements.publishedDate.value,
-    //             categories: e.target.elements.categories.value,
-    //             pageCount: e.target.elements.pageCount.value,
-    //             language: e.target.elements.language.value
-    //         }
     //     }
 
     newBookSubmitHandler = e => {
@@ -48,7 +32,8 @@ class LibraryList extends Component {
             publishedDate: e.target.elements.publishedDate.value,
             categories: e.target.elements.categories.value,
             pageCount: e.target.elements.pageCount.value,
-            language: e.target.elements.language.value
+            language: e.target.elements.language.value,
+            isbn: e.target.elements.isbn.value
         }
         e.target.reset();
         this.setState(prevState => ({
@@ -58,13 +43,14 @@ class LibraryList extends Component {
     }
 
 
-    removeBook = index =>
+    removeBook = index => {
         this.setState({
             books: [
                 ...this.state.books.slice(0, index),
                 ...this.state.books.slice(index + 1)
             ]
-        })
+        });
+    }
 
 
     getTotalBooks = () => this.state.books.length;
@@ -123,6 +109,11 @@ class LibraryList extends Component {
                             type="text"
                             name="language"
                             placeholder="language" />
+
+                        <input required
+                            type="text"
+                            name="isbn"
+                            placeholder="ISBN number" />
                         <button type="submit" name="submit" value="submit">Add Book</button>
                     </form>
                     <LibraryContainer
@@ -136,7 +127,6 @@ class LibraryList extends Component {
 }
 
 LibraryList.propTypes = {
-
     libraries: PropTypes.array.isRequired,
     toggleEditLibraryName: PropTypes.func.isRequired,
     setNameAt: PropTypes.func.isRequired,

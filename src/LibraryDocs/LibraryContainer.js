@@ -6,16 +6,11 @@ class LibraryContainer extends Component {
   render() {
     return (
       <div className="libraryContainer">
-        {this.props.books.map((book, index) =>
-          <Book
+        {console.log(Object.values(this.props.books))}
+        {Object.values(this.props.books).map((book, index) =>
+          <Book 
+            book={book}
             key={index}
-            title={book.title}
-            authors={book.authors}
-            pageCount={book.pageCount}
-            publisher={book.publisher}
-            publishedDate={book.publishedDate}
-            categories={book.categories}
-            language={book.language}
             handleRemoveBook={() => this.props.removeBook(index)}
           />
         )}
