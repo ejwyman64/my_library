@@ -5,15 +5,16 @@ import Book from './Book';
 class LibraryContainer extends Component {
   render() {
     return (
-      <div className="libraryContainer">
-        {console.log(Object.values(this.props.books))}
-        {Object.values(this.props.books).map((book, index) =>
-          <Book 
-            book={book}
+      <div className="booksContainer">
+        {Object.entries(this.props.books|| {}).map(([id, book], index) => {
+          const newBook = {...book, id}
+          console.log(newBook);
+          return <Book  
+            book={newBook}
             key={index}
-            handleRemoveBook={() => this.props.removeBook(index)}
+            deleteBookHandler={this.props.removeBook}
           />
-        )}
+        })}
       </div>
     );
   }
@@ -22,7 +23,7 @@ class LibraryContainer extends Component {
 // The submit button is not working.
 
 LibraryContainer.propTypes = {
-  books: PropTypes.array.isRequired,
+  // books: PropTypes.array.isRequired,
   removeBook: PropTypes.func.isRequired,
 }
 

@@ -13,16 +13,19 @@ class LibraryList extends Component {
     }
 
     componentDidMount() {
-        Axios.get(`https://my-library-220222.firebaseio.com/books.json`)
-        .then(res => this.setState({books: res.data}));
+        this.getBooks()
     }
 
-    // deleteBookHandler = e => {
-    //     e.preventDefault();
-    //     Axios.delete(`https://my-library-220222.firebaseio.com/books.json`)
-    //     .then()
-    // }
+    removeBook = id => {
+        console.log(id);
+        Axios.delete(`https://my-library-220222.firebaseio.com/books/${id}.json`)
+            .then(this.getBooks)
+    }
 
+    getBooks = async () => {
+        return Axios.get(`https://my-library-220222.firebaseio.com/books.json`)
+            .then(res => this.setState({ books: res.data }));
+    }
 
     // sendBookToLibrary = e => {
 
@@ -34,30 +37,19 @@ class LibraryList extends Component {
         e.preventDefault();
         const newBook = {
             title: e.target.elements.title.value,
-            authors: e.target.elements.authors.value,
+            author: e.target.elements.authors.value,
             publisher: e.target.elements.publisher.value,
             publishedDate: e.target.elements.publishedDate.value,
             categories: e.target.elements.categories.value,
             pageCount: e.target.elements.pageCount.value,
             language: e.target.elements.language.value,
-            coverImage: e.target.elements.coverImage.value
+            image: e.target.elements.coverImage.value
         }
         e.target.reset();
-        this.setState(prevState => ({
-            books: [newBook, ...prevState.books],
-            pendingBook: ""
-        }));
+        Axios.post(`https://my-library-220222.firebaseio.com/books.json`, newBook)
+            .then(this.getBooks);
     }
 
-
-    removeBook = index => {
-        this.setState({
-            books: [
-                ...this.state.books.slice(0, index),
-                ...this.state.books.slice(index + 1)
-            ]
-        });
-    }
 
 
     getTotalBooks = () => this.state.books.length;
@@ -65,69 +57,65 @@ class LibraryList extends Component {
 
     render() {
         return (
-            <div>
-                <h2>Collections</h2>
-                <button>+ add Library</button>
-                <div>
-                    {this.props.libraries.map((library, index) =>
-                        <Library
-                            key={index}
-                            name={library.name}
-                            isEditing={library.isEditing}
-                            toggleEditLibraryName={library.toggleEditLibraryName}
-                            handleToggleEditing={() => this.props.toggleEditLibraryName(index)}
-                            setName={text => this.props.setNameAt(text, index)}
-                        />
-                    )}
-                </div>
-                <div>
-                    <form onSubmit={this.newBookSubmitHandler}>
-                        <input required
-                            type="text"
-                            name="title"
-                            placeholder="title" />
+            <div className="libraries">
+                {/* <h2>Collections</h2> */}
+                {/* <button>+ add Library</button> */}
+                <form className="manualAddForm" onSubmit={this.newBookSubmitHandler}>
+                    <input required
+                        type="text"
+                        name="title"
+                        placeholder="title" />
 
-                        <input required
-                            type="text"
-                            name="authors"
-                            placeholder="author" />
+                    <input required
+                        type="text"
+                        name="authors"
+                        placeholder="author" />
 
-                        <input required
-                            type="text"
-                            name="publisher"
-                            placeholder="publisher" />
+                    <input required
+                        type="text"
+                        name="publisher"
+                        placeholder="publisher" />
 
-                        <input required
-                            type="text"
-                            name="publishedDate"
-                            placeholder="published date" />
+                    <input required
+                        type="text"
+                        name="publishedDate"
+                        placeholder="published date" />
 
-                        <input required
-                            type="text"
-                            name="categories"
-                            placeholder="category" />
+                    <input required
+                        type="text"
+                        name="categories"
+                        placeholder="category" />
 
-                        <input required
-                            type="number"
-                            name="pageCount"
-                            placeholder="page count" />
+                    <input required
+                        type="number"
+                        name="pageCount"
+                        placeholder="page count" />
 
-                        <input required
-                            type="text"
-                            name="language"
-                            placeholder="language" />
+                    <input required
+                        type="text"
+                        name="language"
+                        placeholder="language" />
 
-                        <input required
-                            type="text"
-                            name="coverImage"
-                            placeholder="Image URL" />
-                        <button type="submit" name="submit" value="submit">Add Book</button>
-                    </form>
-                    <LibraryContainer
-                        books={this.state.books}
-                        removeBook={this.removeBook}
+                    <input required
+                        type="text"
+                        name="coverImage"
+                        placeholder="Image URL" />
+                    <button type="submit" name="submit" value="submit">add book</button>
+                </form>
+                {this.props.libraries.map((library, index) =>
+                    <Library
+                        key={index}
+                        name={library.name}
+                        isEditing={library.isEditing}
+                        toggleEditLibraryName={library.toggleEditLibraryName}
+                        handleToggleEditing={() => this.props.toggleEditLibraryName(index)}
+                        setName={text => this.props.setNameAt(text, index)}
                     />
-                </div>
+                )}
+                <LibraryContainer
+                    books={this.state.books}
+                    removeBook={this.removeBook}
+                />
             </div>
         );
     }

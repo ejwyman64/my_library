@@ -14,7 +14,29 @@ class Search extends Component {
         const searchUrl = `https://www.googleapis.com/books/v1/volumes?q=${e.target.elements.searchInput.value}`;
         axios.get(searchUrl).then(response => {
             this.setState({
-                searchQuery: response.data.items
+                searchQuery: response.data.items.filter(book => 
+                    book.id &&
+                    book.volumeInfo.categories &&
+                    book.volumeInfo.categories[0] &&
+                    book.volumeInfo.imageLinks.smallThumbnail &&
+                    book.volumeInfo.authors
+
+
+
+                    // can make this a long && string to make sure it includes all of the props I want.
+                    ).map(book => {
+                        return {
+                            title: book.volumeInfo.title,
+                            author: book.volumeInfo.authors,
+                            category: book.volumeInfo.categories[0],
+                            image: book.volumeInfo.imageLinks.smallThumbnail,
+                            publisher: book.volumeInfo.publisher,
+                            publishDate: book.volumeInfo.publishedDate,
+                            language: book.volumeInfo.language,
+                            pageCount: book.volumeInfo.authors,
+                            googleBooksID: book.id
+                        }
+                    })
             });
         }).catch(error => {
             console.log('Error fetching and parsing data.', error)
@@ -22,7 +44,8 @@ class Search extends Component {
     }
 
     addBook = book => {
-        axios.post(`https://my-library-220222.firebaseio.com/books.json`, book)
+        axios.post(`https://my-library-220222.firebaseio.com/books.json`, book);
+        alert("Yay! Your book has been added to your library!");
     }
 
     render() {

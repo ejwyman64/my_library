@@ -4,23 +4,25 @@ class User extends Component {
   render() {
     return (
       <div className="userProfile">
-        <h3>Username</h3>
-        <h4>First Last</h4>
-        <span>An image will be here.</span>
-        <EditUser />
+        <img className="userImage" src="https://cdn1.thr.com/sites/default/files/imagecache/nfe_square_383x383/2013/12/Stack_of_Books_a_p.jpg" alt="stack of books" />
+        <span>
+          <h3>iHEARTbooks58</h3>
+          <h4>Dewey Bibliophile</h4>
+        </span>
+        {/* <EditUser /> */}
       </div>
 
     );
   }
 }
 
-class EditUser extends Component {
-  render() {
-    return (
-      <button className="editUser">Edit</button>
-    );
-  }
-}
+// class EditUser extends Component {
+//   render() {
+//     return (
+//       <button className="editUser">Edit</button>
+//     );
+//   }
+// }
 
 
 export default User;

@@ -1,14 +1,22 @@
-#root {
+html {
   width: 100%;
   padding: 0;
   margin: 0;
+  background-image: linear-gradient(to bottom right, whitesmoke, lightcyan);
+}
+#root {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .container {
   width: 100%;
   padding: 0;
   margin: 0;
-  font-size: 16px;
 }
 
 /*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
@@ -19,45 +27,286 @@
   /*--- Body Structure ---------------*/
 
   .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 10%;
-    padding: 10px 0;
+    height: 50px;
+    padding: 0 0 10px;
     margin: 0;
     background: darkcyan;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    box-shadow: 0 5px 8px rgb(163, 223, 223);
   }
 
   .appTitle {
-    margin: 0;
-    font-size: 0.8rem;
+    margin: 10px auto;
+    font-size: 1rem;
     color: lightcyan;
-    width: 80%;
+    width: 80vw;
     padding: 0 auto;
   }
 
   .titleSubscript {
-    font-size: 0.5rem;
+    font-size: .8rem;
     color: whitesmoke;
-    width: 80%;
+    width: 80vw;
     padding: 0 auto;
-  }
-
-  .navigation {
-    font-size: 0.5rem;
-    width: 80%;
-    padding: 0 auto;
+    margin: 0;
   }
 
   .content {
     width: 80%;
     margin: 0;
-    padding: 0;
+    padding: 0 10%;
+    align-self: center;
     display: flex;
     flex-direction: column;
   }
 
+  .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+    margin-bottom: 40px;
+  }
+  /* User Profile >>>>>>>>> */
+
+  .userProfile {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 20px 0;
+    height: auto;
+    width: auto;
+    border: solid 1px whitesmoke;
+    box-shadow: 5px 5px 8px rgb(163, 223, 223);
+    border-radius: 15px;
+    background: white;
+  }
+
+  .userProfile h3 {
+    font-size: 0.8rem;
+    padding: 5px;
+    margin: 0;
+  }
+  .userProfile h4 {
+    font-size: 0.5rem;
+    padding: 5px;
+    margin: 0;
+  }
+  .userImage {
+    height: auto;
+    width: 29vw;
+    padding: 0;
+    margin: 5px;
+    align-self: center;
+  }
+
+  /* Library Button >>>>>>> */
+
+  .libraryButton {
+    text-decoration: none;
+    color: whitesmoke;
+    background: darkcyan;
+    padding: 6px;
+    margin-top: 20px;
+    border-radius: 6px;
+    align-self: center;
+    cursor: pointer;
+    box-shadow: 5px 5px 8px rgb(163, 223, 223);
+  }
+
+  /* Library Content >>>>>> */
+
+  .libraries {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 6vh 0 0 0;
+    padding: 0;
+
+  }
+
+  /* Form >>>>>>>>>>>>>> */
+
+  .manualAddForm {
+    align-self: center;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 0 0 0;
+    margin-top: 5vh auto;
+    background: white;
+    border: solid whitesmoke .5px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 8px rgb(163, 223, 223);
+  }
+
+  .manualAddForm input {
+    width: 60vw;
+    padding: 8px;
+    margin: 10px auto 10px;
+    border-radius: 8px;
+    cursor: text;
+    align-self: center;
+  }
+
+  .manualAddForm button {
+    font-size: 1.2rem;
+    width: 120px;
+    height: 36px;
+    border: 0;
+    text-decoration: none;
+    color: whitesmoke;
+    background: darkcyan;
+    padding: 6px;
+    margin: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+/* Library Name >>>>>>>>> */
+
+  .library {
+    display: flex;
+    justify-content: space-between;
+    align-self: flex-start;
+    color: darkcyan;
+    background: white;
+    width: auto;
+    height: auto;
+    padding: 6px;
+    margin-top: 70px;
+    border: solid whitesmoke .5px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 5px 5px 8px rgb(163, 223, 223);
+  }
+
+  .editLibraryInput {
+    font-size: 1.5rem;
+    align-self: flex-start;
+    color: darkcyan;
+    background: white;
+    width: 50vw;
+    padding: 6px;
+    margin-right: 5vw;
+    border: solid darkcyan 1px;
+    border-radius: 6px;
+  }
+
+  .library span {
+    font-size: 1.5rem;
+    padding: 5px;
+    padding-right: 5vw;
+  }
+
+  .library button {
+    align-self: flex-end;
+    font-size: 1rem;
+    border: 0;
+    text-decoration: none;
+    color: whitesmoke;
+    background: darkcyan;
+    padding: 6px;
+    border-radius: 6px;
+    align-self: center;
+    cursor: pointer;
+  }
+
+  /* Book Elements >>>>>>>> */
+
+  .booksContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    padding: 0;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+
+  .bookElement {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 2vh;
+    background: white;
+    border: solid whitesmoke .5px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 8px rgb(163, 223, 223);
+  }
+
+  .bookInfoText {
+    padding: 0;
+    padding-left: 5px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    }
+
+  .bookElement img {
+    border-radius: 5px;
+    margin: 10px;
+    width: 60%;
+    height: auto;
+  }
+
+  .bookInfoText h4, h5, h6 {
+    padding: 10px 0 0 10px;
+    margin: 0;
+  }
+
+  .bookElement button {
+    font-size: .8rem;
+    color: whitesmoke;
+    border: 0;
+    text-decoration: none;
+    color: whitesmoke;
+    background: darkcyan;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 6px;
+    align-self: center;
+    cursor: pointer;
+  }
+
+/* Footer >>>>>>>>>>>>>>>>> */
+
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    background: darkcyan;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: space-around;
+    width: 70vw;
+  }
+
+  .nav-link {
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 10px;
+  }
 
 } /*--- Media 200 end bracket ---------------*/
 

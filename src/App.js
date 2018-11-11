@@ -8,6 +8,7 @@ import Header from './Header';
 import Home from './Home';
 import Search from './Search';
 import About from './About';
+import Footer from './Footer';
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
             <Route path="/search" component={Search} />
             <Route path="/about" component={About} />
           </div>
+          <Footer />
         </div>
       </BrowserRouter>
     );

@@ -49,11 +49,9 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="content">
+      <div className="home">
         <User />
-        <div>
-          <NavLink role="button" className="btn btn-outline-info btn-sm" to="/home/library_list">View Library</NavLink>
-        </div>
+        <NavLink role="button" className="libraryButton" to="/home/library_list">view library</NavLink>
         <Route path="/home/library_list" render={() =>
           <LibraryList
             libraries={this.state.libraries}

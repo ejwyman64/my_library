@@ -6,6 +6,7 @@ class LibraryName extends Component {
     if (this.props.isEditing) {
       return (
         <input
+          className="editLibraryInput"
           type="text"
           value={this.props.children}
           onChange={this.props.handleEditName} />

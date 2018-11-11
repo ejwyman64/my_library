@@ -8,12 +8,15 @@ class SearchedBook extends Component {
             return (
                 <div className="bookElement">
                     <div className="bookInfo">
-                        {/* <img src={this.props.book.volumeInfo.imageLinks.smallThumbnail} alt="Cover Art" /> */}
-                        <h6 name="isbn" className="isbn">Book ID: {this.props.book.id}</h6>
-                        <h4 name="title" className="title">Title: {this.props.book.volumeInfo.title}</h4>
-                        <h5 name="authors" className="authors">Author: {this.props.book.volumeInfo.authors[0]}</h5>
-
-
+                        <img src={this.props.book.image} alt="Cover Art" />
+                        <h4 name="title" className="title">Title: {this.props.book.title}</h4>
+                        <h5 name="authors" className="author">Author: {this.props.book.author}</h5>
+                        <h5 name="pageCount" className="pageCount">Length: {this.props.book.pageCount} pages</h5>
+                        <h5 name="publisher" className="publisher">Publisher: {this.props.book.publisher}</h5>
+                        <h5 name="publishedDate" className="publishedDate">Date Published: {this.props.book.publishDate}</h5>
+                        <h5 name="categories" className="categories">Category: {this.props.book.category}</h5>
+                        <h5 name="language" className="language">Language Code: {this.props.book.language}</h5>
+                        <h6 name="googleBookID" className="googleBookID">Google Books ID: {this.props.book.googleBooksID}</h6>
                     </div>
                     <button onClick={this.props.handleAddBook}>+ Add Book</button>
                 </div>
