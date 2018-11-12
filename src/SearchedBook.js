@@ -7,8 +7,8 @@ class SearchedBook extends Component {
         if (this.props.book) {
             return (
                 <div className="bookElement">
-                    <div className="bookInfo">
-                        <img src={this.props.book.image} alt="Cover Art" />
+                    <img src={this.props.book.image} alt="Cover Art" />
+                    <div className="bookInfoText">
                         <h4 name="title" className="title">Title: {this.props.book.title}</h4>
                         <h5 name="authors" className="author">Author: {this.props.book.author}</h5>
                         <h5 name="pageCount" className="pageCount">Length: {this.props.book.pageCount} pages</h5>
@@ -18,7 +18,7 @@ class SearchedBook extends Component {
                         <h5 name="language" className="language">Language Code: {this.props.book.language}</h5>
                         <h6 name="googleBookID" className="googleBookID">Google Books ID: {this.props.book.googleBooksID}</h6>
                     </div>
-                    <button onClick={this.props.handleAddBook}>+ Add Book</button>
+                    <button onClick={this.props.handleAddBook}>+ add book</button>
                 </div>
             )
         } return (

@@ -102,20 +102,22 @@ class LibraryList extends Component {
                         placeholder="Image URL" />
                     <button type="submit" name="submit" value="submit">add book</button>
                 </form>
-                {this.props.libraries.map((library, index) =>
-                    <Library
-                        key={index}
-                        name={library.name}
-                        isEditing={library.isEditing}
-                        toggleEditLibraryName={library.toggleEditLibraryName}
-                        handleToggleEditing={() => this.props.toggleEditLibraryName(index)}
-                        setName={text => this.props.setNameAt(text, index)}
+                <div className="libraryBorder">
+                    {this.props.libraries.map((library, index) =>
+                        <Library
+                            key={index}
+                            name={library.name}
+                            isEditing={library.isEditing}
+                            toggleEditLibraryName={library.toggleEditLibraryName}
+                            handleToggleEditing={() => this.props.toggleEditLibraryName(index)}
+                            setName={text => this.props.setNameAt(text, index)}
+                        />
+                    )}
+                    <LibraryContainer
+                        books={this.state.books}
+                        removeBook={this.removeBook}
                     />
-                )}
-                <LibraryContainer
-                    books={this.state.books}
-                    removeBook={this.removeBook}
-                />
+                </div>
             </div>
         );
     }

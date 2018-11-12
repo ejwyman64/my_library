@@ -20,10 +20,6 @@ class Search extends Component {
                     book.volumeInfo.categories[0] &&
                     book.volumeInfo.imageLinks.smallThumbnail &&
                     book.volumeInfo.authors
-
-
-
-                    // can make this a long && string to make sure it includes all of the props I want.
                     ).map(book => {
                         return {
                             title: book.volumeInfo.title,
@@ -51,9 +47,10 @@ class Search extends Component {
     render() {
         return (
             <div className="search">
-                <h1>This will be a search page!</h1>
-                <h2>Search Guides</h2>
-                <ul>
+                <h1>Search for Books!</h1>
+                <h2>Find your books and add them to your library list.</h2>
+                <h3>Use these search guides to help you find what you are looking for. The books you search for will appear below the search bar. When you add a book you should get an alert confirming that the book was added to your library.</h3>
+                <ul className="searchGuide">
                     <li><span>intitle:</span> Returns results where the text following this keyword is found in the title.</li>
                     <li><span>inauthor:</span> Returns results where the text following this keyword is found in the author.</li>
                     <li><span>inpublisher:</span> Returns results where the text following this keyword is found in the publisher.</li>
@@ -62,14 +59,14 @@ class Search extends Component {
                     <li><span>lccn:</span> Returns results where the text following this keyword is the Library of Congress Control Number.</li>
                     <li><span>oclc:</span> Returns results where the text following this keyword is the Online Computer Library Center number.</li>
                 </ul>
-                <form onSubmit={this.submitHandlerSearch}>
+                <form className="searchForm" onSubmit={this.submitHandlerSearch}>
                     <input required
                         type="text"
                         name="searchInput"
                         placeholder="title, author, publisher, isbn, etc." />
-                    <button type="submit" name="submit" value="submit">Search for Book</button>
+                    <button type="submit" name="submit" value="submit">search</button>
                 </form>
-                <div>
+                <div className="booksContainer">
                     {this.state.searchQuery.map((book, index) =>
                         <SearchedBook
                             key={index}
