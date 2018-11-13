@@ -8,12 +8,15 @@ class Search extends Component {
     state = {
         searchQuery: []
     }
-
+    
+    // this function does lots of cool things.
+    // First: it gets the info for up to 10 books based on what you searched in the search input.
     submitHandlerSearch = (e) => {
         e.preventDefault();
         const searchUrl = `https://www.googleapis.com/books/v1/volumes?q=${e.target.elements.searchInput.value}`;
         axios.get(searchUrl).then(response => {
             this.setState({
+                // Second: it filters out responses that are lacking key contents, like a picture or an author.
                 searchQuery: response.data.items.filter(book => 
                     book.id &&
                     book.volumeInfo.categories &&
@@ -21,6 +24,7 @@ class Search extends Component {
                     book.volumeInfo.imageLinks.smallThumbnail &&
                     book.volumeInfo.authors
                     ).map(book => {
+                        // Third: it restructures that info into an object that matches the firebase objects (so when you add it to firebase it is formatted the same).
                         return {
                             title: book.volumeInfo.title,
                             author: book.volumeInfo.authors,
@@ -35,10 +39,12 @@ class Search extends Component {
                     })
             });
         }).catch(error => {
+            // and it has a nice error if something didn't work out :D
             console.log('Error fetching and parsing data.', error)
         });
     }
 
+    // This function adds the book that you selected to your firebase database.
     addBook = book => {
         axios.post(`https://my-library-220222.firebaseio.com/books.json`, book);
         alert("Yay! Your book has been added to your library!");

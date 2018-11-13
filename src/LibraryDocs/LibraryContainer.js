@@ -6,12 +6,14 @@ class LibraryContainer extends Component {
   render() {
     return (
       <div className="booksContainer">
+        {/*Renders books from the firebase*/}
         {Object.entries(this.props.books|| {}).map(([id, book], index) => {
           const newBook = {...book, id}
           console.log(newBook);
           return <Book  
             book={newBook}
             key={index}
+            // Connects the removeBook function to the "remove button"
             deleteBookHandler={this.props.removeBook}
           />
         })}
@@ -19,8 +21,6 @@ class LibraryContainer extends Component {
     );
   }
 }
-
-// The submit button is not working.
 
 LibraryContainer.propTypes = {
   // books: PropTypes.array.isRequired,

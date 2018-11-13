@@ -15,7 +15,7 @@ class Home extends Component {
   }
 
 
-  //Library functions ----------------------
+  //Library name functions ----------------------
   //toggle library options
   toggleLibraryOptions = (property, indexToChange) =>
     this.setState({

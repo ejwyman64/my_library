@@ -16,8 +16,8 @@ class Book extends Component {
                         <h5 name="categories" className="categories">Category: {this.props.book.category}</h5>
                         <h5 name="language" className="language">Language Code: {this.props.book.language}</h5>
                         <h6 name="googleBookID" className="googleBookID">Google Books ID: {this.props.book.googleBooksID}</h6>
-                        {/* <h5 name="isbn" className="isbn">ISBN: {this.props.book.volumeInfo.industryIdentifiers.find(identifier => identifier.type === "ISBN_13")}</h5> */}
                     </div>
+                    {/* function to handle deleting books on the click event. */}
                     <button onClick={() => this.props.deleteBookHandler(this.props.book.id)}>remove</button>
             </div>
         )

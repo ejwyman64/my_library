@@ -12,16 +12,20 @@ class LibraryList extends Component {
         books: {}
     }
 
+    //runs the function to get books from firebase.
     componentDidMount() {
         this.getBooks()
     }
 
+
+    //removes book from the firebase database.
     removeBook = id => {
         console.log(id);
         Axios.delete(`https://my-library-220222.firebaseio.com/books/${id}.json`)
             .then(this.getBooks)
     }
 
+    // retrieves book information from firebase.
     getBooks = async () => {
         return Axios.get(`https://my-library-220222.firebaseio.com/books.json`)
             .then(res => this.setState({ books: res.data }));
@@ -33,6 +37,8 @@ class LibraryList extends Component {
     //         method: 'POST',
     //     }
 
+
+    //posts the book information that was manually created by the user in firebase.
     newBookSubmitHandler = e => {
         e.preventDefault();
         const newBook = {
@@ -51,8 +57,8 @@ class LibraryList extends Component {
     }
 
 
-
-    getTotalBooks = () => this.state.books.length;
+    //will list total number of books
+    // getTotalBooks = () => this.state.books.length;
 
 
     render() {
